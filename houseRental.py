@@ -63,8 +63,8 @@ class Tenant:
 class choice(main_class,Owner,Tenant):
     houses=[]
     def options(self):
-        for key,val in option.items():
-            print("{0}. {1}".format(key,val))
+        for key,value in option.items():
+            print("{0}. {1}".format(key,value))
         choice_user=int(input("Enter option:"))
         print("\nWelcome {0}".format(option[choice_user]))
         self.user_options(choice_user)
