@@ -1,22 +1,22 @@
 
 option={1:"Owner", 2: "Tenant", 3:"Approver"}
-houses=[]
-requests=[]
-class HomeRent:
+mylist_house=[]
+add_house=[]
+class main_class:
     def __init__(self):
-        print("WELCOME TO OUR HOUSE RENTING PAGE!!!\n")
+        print("WELCOME!!!\n")
     
     def available_houses(self):
         print()
-        if len(houses)==0:
+        if len(mylist_house)==0:
             print("Not available!")
             return False
-        for index,house in enumerate(houses):
+        for index,house in enumerate(mylist_house):
             print("House No:{0} Details:{1}".format(index,house))
         return True
     
         
-class Owner():
+class Owner:
     
     def post_house(self):
         house={}
@@ -24,7 +24,7 @@ class Owner():
         house["type_house"]=input("\nEnter type:")
         house["Sqft"]=input("Enter Square Feet:")
         house["Rent"]=input("Enter Rent:")
-        houses.append(house)
+        mylist_house.append(house)
         print("\nAdded Successfully!!")
         self.user_options(1)
         
@@ -32,71 +32,64 @@ class Owner():
         print("\nAvailable houses:")
         if self.available_houses():
             house_no=int(input("Enter house number to remove: "))
-            houses.pop(house_no)
+            mylist_house.pop(house_no)
             print("\nHouse Removed Successfully!!")
         self.user_options(1)
         
     def view_details(self):
         print("\nRental Requests:")
-        if len(requests)==0:
-            print("No Requests available")
+        if len(add_house)==0:
+            print("Not available")
         else:
-            for index,request in enumerate(requests):
+            for index,request in enumerate(add_house):
                 print("Request No: {0} Request: {1}".format(index,request))
         self.user_options(1)
 
 
 
-class Tenant():
+class Tenant:
     
     def rent_request(self):
         self.available_houses()
         request={}
         request["Name"]=input("\nEnter Name: ")
         request["House No"]=input("Enter House No: ")
-        request["Tenant User ID"]=input("Enter Tenant User ID: ")
-        request["House Owner ID"]=input("Enter House Owner ID: ")
-        requests.append(request)
+        request["House location"]=input("Enter house location: ")
+        
+        add_house.append(request)
         print("\nRequest Submitted Successfully!!")
-        self.relogin()
+    
 
-class choice(HomeRent,Owner,Tenant):
+class choice(main_class,Owner,Tenant):
     houses=[]
     def options(self):
         for key,val in option.items():
             print("{0}. {1}".format(key,val))
-        user_type=int(input("Enter user-type(1-3):"))
-        print("\nWelcome {0}".format(option[user_type]))
-        self.user_options(user_type)
+        choice_user=int(input("Enter option:"))
+        print("\nWelcome {0}".format(option[choice_user]))
+        self.user_options(choice_user)
         
-    def relogin(self):
-        print("\nLogged Out successfully!!")
-        print("USE PORTAL AGAIN??")
-        login=input("Enter y/n: ")
-        if login=="y":
-            self.options()
+    
         
     def user_options(self,user_type):
         if user_type==1:
             print("\nowner Options:")
-            print("1. Post a house for rental")
-            print("2. Remove house from rental")
+            print("1. House details")
+            print("2. Remove")
             print("3. View details")
-            print("4: Logout")
-            option=int(input("\nEnter option number:"))
+            option=int(input("\nEnter option:"))
             if option==1:
                 self.post_house()
             elif option==2:
                 self.remove_house()
             elif option==3:
                 self.view_details()
-            else:
-                self.relogin()
+            
             
             
         elif user_type==2:
             print("\nTenant Options:")
-            print("1. Request to rent a house")
+            print("1. Request for house")
             print("2. Quit")
             option=int(input("Enter option: "))
             if option==1:
@@ -105,12 +98,11 @@ class choice(HomeRent,Owner,Tenant):
                 self.options()
         
         
-        elif user_type==3:
-            print("\nApprover Options:")
-            print("View Requests")   
+       
 
                        
 if __name__=="__main__":
     x=choice()
     x.options()
+    
     
