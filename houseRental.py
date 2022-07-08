@@ -1,18 +1,17 @@
-
 option={1:"Owner", 2: "Tenant", 3:"Approver"}
 mylist_house=[]
 add_house=[]
 class main_class:
-    # def __init__(self):
-    print("WELCOME!!!\n")
+    
+    print("WELCOME to our page!!!\n")
     
     def available_houses(self):
         print()
         if len(mylist_house)==0:
             print("Not available!")
             return False
-        for index,house in enumerate(mylist_house):
-            print("House No:{0} Details:{1}".format(index,house))
+        for index,keyval in enumerate(mylist_house):
+            print("House No:{0} Details:{1}".format(index,keyval))
         return True
     
         
@@ -21,7 +20,7 @@ class Owner:
     def house_details(self):
         house={}
         house["City"]=input("Enter City:")
-        house["type_house"]=input("\nEnter type:")
+        house["type_house"]=input("\nEnter house type:")
         house["Sqft"]=input("Enter Square Feet:")
         house["Rent"]=input("Enter Rent:")
         mylist_house.append(house)
@@ -29,11 +28,11 @@ class Owner:
         self.user_options(1)
         
     def remove_house(self):
-        print("\nAvailable houses:")
+        print("\nEnter House details:")
         if self.available_houses():
             house_no=int(input("Enter house number to remove: "))
             mylist_house.pop(house_no)
-            print("\nHouse Removed Successfully!!")
+            print("\nHouse detail Removed Successfully!!")
         self.user_options(1)
         
     def view_HouseDetails(self):
@@ -41,8 +40,8 @@ class Owner:
         if len(add_house)==0:
             print("Not available")
         else:
-            for index,request in enumerate(add_house):
-                print("Request No: {0} Request: {1}".format(index,request))
+            for index,key in enumerate(add_house):
+                print("Request No: {0} Request: {1}".format(index,key))
         self.user_options(1)
 
 
@@ -92,16 +91,14 @@ class choice(main_class,Owner,Tenant):
             print("1. Request for house")
             print("2. Quit")
             option=int(input("Enter option number: "))
-            if option==1:
-                self.rent_request()
-            else:
-                self.options()
-        
-        
-       
-
-                       
+            self.rent_request() if option==1 else self.options()
+                
 if __name__=="__main__":
     x=choice()
     x.options()
+
+        
+       
+
+
     
